@@ -51,11 +51,14 @@ The lambda arguments are auto-generated, based on these rules:
 1. Up to nine arguments of the form `%1', ..., `%9' are allowed,
 in addition to a &rest-style argument `%&'.
 
-2. In the case when `%1' is the highest-ranking argument, it may
-be abbreviated to `%'.
+2. In the case when `%1' is the only argument, besides possibly
+`%&`, it may be abbreviated to `%'.
 
 3. The lower-ranking arguments are auto-added, even if they are
-not present in FORMS."
+not present in STRUCTURE, i.e:
+
+    (short-lambda (list %3)) => (lambda (%1 %2 %3) (list %3))
+"
   `(lambda ,(sl--arguments structure) ,structure))
 
 (defun sl--arguments (tree)
